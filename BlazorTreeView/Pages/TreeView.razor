@@ -1,0 +1,58 @@
+﻿@page "/TreeView"
+@using Syncfusion.EJ2.Blazor.Navigations
+<div class="control-section">
+    <div class="control_wrapper">
+        <EjsTreeView TValue="TreeItem">
+            <TreeViewFieldsSettings DataSource="@TreeDataSource" Id="NodeId" Text="NodeText" Expanded="Expanded" Child="@("Child")"></TreeViewFieldsSettings>
+        </EjsTreeView>
+    </div>
+</div>
+@code{
+    List<TreeItem> TreeDataSource = new List<TreeItem>();
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        TreeDataSource.Add(new TreeItem
+        {
+            NodeId = "01",
+            NodeText = "Chakkalayil House",
+            Expanded = true,
+            Child = new List<TreeItem>()
+{
+                new TreeItem { NodeId = "01-01", NodeText = "Anil Soman", Expanded =true,
+                    Child = new List<TreeItem>()
+    {
+                        new TreeItem { NodeId = "01-01-01", NodeText = "Adobe Illustrator" },
+                        new TreeItem { NodeId = "01-01-02", NodeText = "Adobe Photoshop" },
+                        new TreeItem { NodeId = "01-01-03", NodeText = "InVision" }
+                    },
+                },
+                new TreeItem { NodeId = "01-02", NodeText = "Sarathlal Saseendran", Expanded = true,
+                    Child = new List<TreeItem>()
+    {
+                        new TreeItem { NodeId = "01-02-01", NodeText = "Blazor" },
+                        new TreeItem { NodeId = "01-02-02", NodeText = "ASP.NET Core" },
+                        new TreeItem { NodeId = "01-02-03", NodeText = "Cosmos DB" },
+                    },
+                },
+            },
+        });
+    }
+    class TreeItem
+    {
+        public string NodeId { get; set; }
+        public string NodeText { get; set; }
+        public string Icon { get; set; }
+        public bool Expanded { get; set; }
+        public bool Selected { get; set; }
+        public List<TreeItem> Child { get; set; }
+    }
+}
+<style>
+    .control_wrapper {
+        max-width: 500px;
+        margin: auto;
+        border: 1px solid #dddddd;
+        border-radius: 3px;
+    }
+</style>
